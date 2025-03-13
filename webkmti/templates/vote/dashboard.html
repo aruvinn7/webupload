@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-profile.html" />
+
+	<title>KMTI 2025/2026</title>
+
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<style>
+
+		     /* Container utama agar tidak terlalu lebar */
+		.container-fluid {
+            max-width: 1200px; /* Batasi lebar maksimal */
+            margin: 0 auto;
+        }
+
+        /* Responsif untuk layar besar */
+        @media (min-width: 1400px) {
+            .container-fluid {
+                max-width: 1000px;
+            }
+        }
+		.card {
+    max-width: 90%; /* Agar tidak terlalu besar */
+    margin: auto; /* Tengah */
+}
+
+		/* Global Styles */
+		body {
+			background-color: #f8f9fa; /* Light gray background */
+			font-family: 'Inter', sans-serif;
+			color: #333;
+		}
+		
+		/* Header */
+		.card-container .row {
+			display: flex;
+			flex-wrap: wrap; /* Agar responsif */
+			justify-content: center; /* Agar posisi kartu di tengah */
+
+		}
+
+
+		.card-header {
+			background-color: #ffc107; /* Blue background */
+			color: #fff; /* White text */
+			border: none;
+			position: absolute;
+            padding: 5px 10px;
+            border-radius: 5px;
+		}
+
+		/* Card Styles */
+		.card {
+			border: none;
+			border-radius: 10px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+		}
+
+		.card-title {
+			color: #007bff; /* Blue text */
+			font-family: 'Poppins', sans-serif;
+			font-weight: 700;
+			font-size: 170%;
+		}
+
+		.card-body {
+			background-color: #fff; /* White background */
+			color: #333; /* Dark text */
+		}
+		/* Visi & Misi Section */
+		.visi-misi {
+			background-color: #fff;
+			border-left: 4px solid #ffc107; /* Yellow border */
+			padding: 20px;
+			border-radius: 8px;
+			margin-bottom: 20px;
+		}
+
+		.visi-misi h5 {
+			color: #007bff; /* Blue text */
+			font-weight: 600;
+		}
+
+		.visi-misi p,
+		.visi-misi ul {
+			color: #555; /* Dark gray text */
+			font-size: 16px;
+			line-height: 1.6;
+			text-align: justify;
+		}
+
+		.visi-misi ul {
+			padding-left: 20px;
+		}
+
+		.visi-misi ul li {
+			margin-bottom: 10px;
+		}
+
+		/* Footer */
+		.footer {
+			background-color: #007bff; /* Blue background */
+			color: #fff; /* White text */
+			padding: 20px 0;
+			text-align: center;
+			margin-top: 40px;
+		}
+
+		.footer a {
+			color: #ffc107; /* Yellow text */
+			text-decoration: none;
+			font-weight: 1000;
+		}
+
+		.footer a:hover {
+			text-decoration: underline;
+		}
+
+		/* Button Styles */
+		.btn-primary {
+			background-color: #ffc107; /* Yellow background */
+			border: none;
+			width: 100%;
+			color: #fff; /* Blue text */
+			font-weight: 600;
+			padding: 10px 20px;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+		}
+
+		.btn-primary:hover {
+			background-color: #e0a800; /* Darker yellow on hover */
+		}
+		/* Motto Styles */
+	/* Motto Styles */
+.motto-container {
+    display: flex;
+    flex-direction: column; /* Mengatur tata letak vertikal */
+    align-items: center; /* Pusatkan horizontal */
+    justify-content: center; /* Pusatkan vertikal */
+    background-color: #ffffff; /* Latar belakang putih */
+    padding: 17px; /* Padding yang lebih besar */
+    border-radius: 10px; /* Sudut yang lebih bulat */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+    margin: 20px 0;
+    border: 2px solid #e0a800; /* Garis tipis untuk kesan minimalis */
+    transition: box-shadow 0.3s ease;
+    max-width: 400px; /* Lebar maksimum untuk kesan rapi */
+    width: 100%; /* Responsif */
+    text-align: center; /* Teks rata tengah */
+}
+
+.motto-container:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Efek hover halus */
+}
+
+.motto-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #007bff; /* Warna biru untuk judul */
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px; /* Jarak antara judul dan teks */
+    text-align: center;
+}
+
+.motto-text {
+    font-style: italic;
+    font-weight: 400; /* Lebih ringan untuk teks motto */
+    color: #555; /* Warna teks abu-abu gelap */
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif; /* Font bersih dan modern */
+    line-height: 1.6; /* Jarak antar baris yang nyaman */
+    margin: 0;
+}
+
+		</style>
+</head>
+
+<body>
+	
+	<div class="wrapper">
+		<div class="main">
+			<main class="content">
+				<div class="container-fluid p-0">
+					
+					<div class="mb-3">
+						<h1 style="font-family: 'Poppins', sans-serif; font-size: 160%; font-weight:700;">Calon Ketua Himpunan Mahasiswa Teknik Industri 2025/2026</h1>
+					</div>
+					<div class="card-container">
+						<div class="row justify-content-center">
+							<div class="col">
+								<div class="card mb-3">
+									<div class="card-header">
+										<h3 class="card-title mb-0" style="color: #fff;">
+											Calon 01
+										</h3>
+									</div>
+									<div class="card-body text-center">
+										<img src="{% static 'img/lanang.png' %}" class="card-img-top mb-2" width="128" height="128" />
+										<h5 class="mt-2 card-title">Lanang Rizqi Bantar</h5>
+										<div class="motto-container">
+											<h3 class="motto-title">Motto</h3>
+											<span class="motto-text">"Cara terbaik untuk memprediksi masa depan adalah dengan menciptakannya"</span>
+										</div>
+									</div>
+									<hr class="my-0" />
+									<div class="card-body">
+										<div class="visi-misi">
+											<h5 style="font-family: 'Poppins', sans-serif;">Visi</h5>
+											<p>
+												"MENGHADIRKAN HMTI FT-UB SEBAGAI WADAH UTAMA BAGI MAHASISWA TEKNIK INDUSTRI FT-UB UNTUK BERPROSES DAN BERKEMBANG"
+											</p>
+										</div>
+										<div class="visi-misi">
+											<h5>Misi</h5>
+											<ul>
+												<li>Membangun HMTI FT-UB menjadi lembaga kemahasiswaan yang komprehensif dan progresif bagi mahasiswa Teknik Industri FT-UB.</li>
+												<li>Menfasilitasi kolaborasi sinergis baik antar mahasiswa Teknik Inudstri FT-UB maupun dengan pihak eksternal.</li>
+												<li>Memastikan HMTI FT-UB menjadi lembaga kemahasiswaan yang adaptif dan berkelanjutan.</li>
+											</ul>
+										</div>
+										<form action="{% url 'dashboard' %}" method="POST">
+											{% csrf_token %}
+											<input type="hidden" name="vote" value="True">
+											<button type="submit" class="btn btn-primary">Pilih 01</button>
+										</form>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col">
+								<div class="card mb-3">		
+									<div class="card-header">
+										<h3 class="card-title mb-0" style="color: #fff;">
+											Calon 02
+										</h3>
+									</div>
+									<div class="card-body text-center">
+										<img src="{% static 'img/dzikron.png' %}" class="card-img-top mb-2" width="128" height="128" />
+										<h5 class="mt-2 card-title">Dzikron Fauqo Nirwana</h5>
+										<div class="motto-container">
+											<h3 class="motto-title">Motto</h3>
+											<span class="motto-text">"Everything in life is a COMPETITION, Try Hard as You Can"</span>
+										</div>
+
+									</div>
+									<hr class="my-0" />
+									<div class="card-body">
+										<div class="visi-misi">
+											<h5>Visi</h5>
+											<p>
+												"Menghadirkan HMTI FT-UB yang terbuka sebagai wadah mahasiswa TI FT-UB untuk berkembang dengan sistem yang terintegrasi"
+											</p>
+										</div>
+											<div class="visi-misi">
+												<h5>Misi</h5>
+												<ul>
+													<li>Membangun HMTI yang dinamik untuk dampak positif ke seluruh lapisan mahasiswa yang ada di TI sehingga terciptanya kebersamaan secara organik.</li>
+													<li>Memanfaatkan relasi dan keilmuan teknik industri untuk mendukung pengembangan mahasiswa TI.</li>
+													<li>Integrasi sistem yang sudah ada untuk menciptakan sistem keberlanjutan HMTI agar dapat menopang kedaulatan TI secara berkelanjutan.</li>
+												</ul>
+											</div>
+											<form action="{% url 'dashboard' %}" method="POST">
+												{% csrf_token %}
+												<input type="hidden" name="vote" value="False">
+												<button type="submit" class="btn btn-primary">Pilih 02</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+				
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-12 text-center">
+							<p class="mb-0">
+								<a href="https://adminkit.io/" target="_blank"><strong>Panitia KMTI</strong></a> &copy; 2025
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script src="{% static 'js/app.js' %}"></script>
+
+</body>
+
+</html>
