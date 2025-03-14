@@ -79,28 +79,47 @@
 
     <!-- Tabel List Vote -->
     <div class="table-responsive shadow-lg">
-        <table class="table table-bordered bg-white">
-            <thead>
-                <tr style="background: linear-gradient(45deg, #007BFF, #00BFFF);">
-                    <th class="text-white">No</th>
-                    <th class="text-white">NIM</th>
-                    <th class="text-white">Pilihan</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for vote in votes %}
-                <tr class="hover-effect">
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ vote.nama }}</td>
-                    <td>{{ vote.vote }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="3" class="text-center">Belum ada suara yang masuk.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <form method="POST" action="{% url 'delete_vote' %}">
+            {% csrf_token %}
+            <table class="table table-bordered bg-white">
+                <thead>
+                    <tr style="background: linear-gradient(45deg, #007BFF, #00BFFF);">
+                        {% if delete %}
+                        <th class="text-white">Pilih</th>
+                        {% endif %}
+                        <th class="text-white">No</th>
+                        <th class="text-white">NIM</th>
+                        <th class="text-white">Pilihan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vote in votes %}
+                    <tr class="hover-effect">
+                        {% if delete %}
+                        <td><input type="checkbox" name="selected_votes" value="{{ vote.nama }}"></td>
+                        {% endif %}
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ vote.nama }}</td>
+                        <td>{{ vote.vote }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="{% if delete %}4{% else %}3{% endif %}" class="text-center">Belum ada suara yang masuk.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+            {% if "delete" in delete %}
+            <button type="submit" class="btn btn-danger mt-3">Hapus Vote Terpilih</button>
+            {% endif %}
+            
+        </form>
+    </div>
+    
+    <!-- Tombol Logout -->
+    <div class="text-center mt-4">
+        <a href="{% url 'login' %}" class="btn btn-warning">Logout</a>
     </div>
     
     <style>

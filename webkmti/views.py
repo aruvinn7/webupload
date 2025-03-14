@@ -20,7 +20,7 @@ def login(request):
     if request.method == 'GET':
         return render(request, 'login.html')
     else:
-        nim = request.POST.get('username')  # Jangan langsung ubah ke int
+        nim = request.POST.get('username')
         password = request.POST.get('password')
 
         if not os.path.exists(akun_file):
@@ -29,17 +29,23 @@ def login(request):
         df = pd.read_excel(akun_file)
         dict_akun = dict(zip(df['nim'].astype(str), df['pass']))  
 
-        # Cek apakah NIM ada dalam dictionary dan password cocok
         if nim in dict_akun and dict_akun[nim] == password:
             request.session['nim'] = nim  
             messages.success(request, 'Login Berhasil!')
-            
-            if nim == "112233" :
-                print("masuk sini")
+
+            # Reset akun setiap kali user login
+            global akun
+            akun = []  # Kosongkan dulu setiap login
+
+            if nim == "112233":
+                akun.append("delete")
+                return redirect('read_vote') # Tambahkan "delete" hanya jika user 223344
+
+            elif nim == 'panitiakmti2025' :
                 return redirect('read_vote')
+            
             return redirect('dashboard')
 
-            
         else:
             messages.error(request, 'Login gagal, periksa kembali NIM dan Password!')
             return redirect('login')
@@ -102,7 +108,45 @@ def read_vote(request):
         total_dzikron = (df_vote['vote'] == "DZIKRON FAUQO NIRWANA").sum()
 
     return render(request, 'vote/read_vote.html', {
+        'delete' : akun,
         'votes': votes,
-        'total_lanang': total_lanang,   
+        'total_lanang': total_lanang,
         'total_dzikron': total_dzikron
     })
+    
+def delete_vote(request):
+    if 'nim' not in request.session:
+        messages.error(request, 'Anda belum login!')
+        return redirect('login')
+
+    nim = request.session['nim']
+
+    # Hanya NIM 223344 yang bisa menghapus vote
+    if nim != "112233":
+        messages.error(request, 'Anda tidak memiliki akses untuk menghapus vote!')
+        return redirect('read_vote')
+
+    if request.method == 'POST':
+        selected_votes = request.POST.getlist('selected_votes')  # Ambil daftar vote yang dipilih
+        
+        if not selected_votes:
+            messages.error(request, 'Tidak ada vote yang dipilih untuk dihapus!')
+            return redirect('read_vote')
+
+        if not os.path.exists(vote_file):
+            messages.error(request, 'File vote.xlsx tidak ditemukan!')
+            return redirect('read_vote')
+
+        # Baca file vote.xlsx
+        df_vote = pd.read_excel(vote_file)
+
+        # Filter vote yang tidak terpilih agar tetap tersimpan
+        df_vote = df_vote[~df_vote['nama'].astype(str).isin(selected_votes)]
+
+        # Simpan perubahan ke file Excel
+        df_vote.to_excel(vote_file, index=False)
+
+        messages.success(request, 'Vote yang dipilih berhasil dihapus!')
+        return redirect('read_vote')
+
+    return redirect('read_vote')

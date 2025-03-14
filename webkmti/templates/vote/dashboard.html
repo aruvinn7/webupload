@@ -194,7 +194,7 @@
     margin: 0;
 }
 
-		</style>
+	</style>
 </head>
 
 <body>
@@ -243,7 +243,8 @@
 										<form action="{% url 'dashboard' %}" method="POST">
 											{% csrf_token %}
 											<input type="hidden" name="vote" value="True">
-											<button type="submit" class="btn btn-primary">Pilih 01</button>
+											<button type="submit" class="btn btn-primary vote-button" data-candidate="Lanang Rizqi Bantar">Pilih 01</button>
+
 										</form>
 									</div>
 								</div>
@@ -284,7 +285,8 @@
 											<form action="{% url 'dashboard' %}" method="POST">
 												{% csrf_token %}
 												<input type="hidden" name="vote" value="False">
-												<button type="submit" class="btn btn-primary">Pilih 02</button>
+												<button type="submit" class="btn btn-primary vote-button" data-candidate="Dzikron Fauqo Nirwana">Pilih 02</button>
+
 											</form>
 										</div>
 									</div>
@@ -309,7 +311,23 @@
 	</div>
 
 	<script src="{% static 'js/app.js' %}"></script>
-
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const voteButtons = document.querySelectorAll(".vote-button");
+	
+			voteButtons.forEach(button => {
+				button.addEventListener("click", function (event) {
+					event.preventDefault(); // Mencegah form langsung terkirim
+					const candidateName = this.getAttribute("data-candidate"); // Ambil nama kandidat dari atribut
+					const confirmation = confirm(`Apakah Anda yakin ingin memilih ${candidateName}?`);
+					if (confirmation) {
+						this.closest("form").submit(); // Kirim form jika konfirmasi OK
+					}
+				});
+			});
+		});
+	</script>
+	
 </body>
 
 </html>

@@ -10,5 +10,6 @@ urlpatterns = [
     
     # Vote URLs
     path('read_vote/', views.read_vote, name='read_vote'),
+    path('delete_vote/', views.delete_vote, name='delete_vote'),
 
 ]
