@@ -1,8 +1,5 @@
 {
     "builds": [{
-       "env": {
-      "PYTHON_VERSION": "3.10"
-    },
     "src": "kmti/wsgi.py",
     "use": "@vercel/python",
     "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.3" }
