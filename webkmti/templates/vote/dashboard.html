@@ -194,7 +194,7 @@
     margin: 0;
 }
 
-	</style>
+		</style>
 </head>
 
 <body>
@@ -243,8 +243,7 @@
 										<form action="{% url 'dashboard' %}" method="POST">
 											{% csrf_token %}
 											<input type="hidden" name="vote" value="True">
-											<button type="submit" class="btn btn-primary vote-button" data-candidate="Lanang Rizqi Bantar">Pilih 01</button>
-
+											<button type="submit" class="btn btn-primary">Pilih 01</button>
 										</form>
 									</div>
 								</div>
@@ -285,8 +284,7 @@
 											<form action="{% url 'dashboard' %}" method="POST">
 												{% csrf_token %}
 												<input type="hidden" name="vote" value="False">
-												<button type="submit" class="btn btn-primary vote-button" data-candidate="Dzikron Fauqo Nirwana">Pilih 02</button>
-
+												<button type="submit" class="btn btn-primary">Pilih 02</button>
 											</form>
 										</div>
 									</div>
@@ -310,24 +308,50 @@
 		</div>
 	</div>
 
+	<!-- Modal Konfirmasi -->
+    <div id="confirmationModal" class="card" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; padding: 20px; background-color: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <h5 style="font-family: 'Poppins', sans-serif; font-size: 1.2em; margin-bottom: 15px;">Apakah kamu yakin ingin memilih calon ini?</h5>
+        <div style="display: flex; gap: 10px;">
+            <button id="confirmYes" class="btn btn-primary">Iya</button>
+            <button id="confirmNo" class="btn btn-primary">Tidak</button>
+        </div>
+    </div>
+
+    <!-- Overlay untuk Modal -->
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitButtons = document.querySelectorAll('button[type="submit"]');
+            const confirmationModal = document.getElementById('confirmationModal');
+            const overlay = document.getElementById('overlay');
+            let formToSubmit = null;
+
+            submitButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    formToSubmit = button.closest('form');
+                    confirmationModal.style.display = 'block';
+                    overlay.style.display = 'block';
+                });
+            });
+
+            document.getElementById('confirmYes').addEventListener('click', function () {
+                confirmationModal.style.display = 'none';
+                overlay.style.display = 'none';
+                formToSubmit.submit();
+            });
+
+            document.getElementById('confirmNo').addEventListener('click', function () {
+                confirmationModal.style.display = 'none';
+                overlay.style.display = 'none';
+                formToSubmit = null;
+            });
+        });
+    </script>
+
 	<script src="{% static 'js/app.js' %}"></script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			const voteButtons = document.querySelectorAll(".vote-button");
-	
-			voteButtons.forEach(button => {
-				button.addEventListener("click", function (event) {
-					event.preventDefault(); // Mencegah form langsung terkirim
-					const candidateName = this.getAttribute("data-candidate"); // Ambil nama kandidat dari atribut
-					const confirmation = confirm(`Apakah Anda yakin ingin memilih ${candidateName}?`);
-					if (confirmation) {
-						this.closest("form").submit(); // Kirim form jika konfirmasi OK
-					}
-				});
-			});
-		});
-	</script>
-	
+
 </body>
 
 </html>
